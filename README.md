@@ -1,3 +1,5 @@
+[![Texto alternativo da imagem](https://cdn.discordapp.com/attachments/1125892268138713201/1312970064168878131/logo-nav.png?ex=674e6e29&is=674d1ca9&hm=d206061aaf6aca7bdd7b6d67e98644695eebe09d7a696445498d85dc921d3591&)](https://www.seu-link.com)
+
 # ApiBurguerMania
 
 A **ApiBurguerMania** é uma API RESTful desenvolvida para gerenciar pedidos de hambúrgueres, incluindo a criação de produtos, realização de pedidos e integração com banco de dados MySQL. A API foi construída utilizando **ASP.NET Core** com **Entity Framework Core** e a base de dados é gerenciada através do **Pomelo.EntityFrameworkCore.MySql**.
@@ -9,8 +11,6 @@ A **ApiBurguerMania** é uma API RESTful desenvolvida para gerenciar pedidos de 
 - [Requisitos](#requisitos)
 - [Instalação](#instalação)
 - [Configuração do Banco de Dados](#configuração-do-banco-de-dados)
-- [Uso](#uso)
-- [Endpoints da API](#endpoints-da-api)
 - [Licença](#licença)
 
 ## Descrição
@@ -74,7 +74,6 @@ dotnet run
 
 A API estará disponível em http://localhost:5299/swagger/index.html
 
-
 ## Configuração do Banco de Dados
 
 O banco de dados é configurado no arquivo `appsettings.json`. Abaixo está um exemplo de configuração para o MySQL:
@@ -85,11 +84,8 @@ O banco de dados é configurado no arquivo `appsettings.json`. Abaixo está um e
     "DefaultConnection": "Server=localhost;Database=ApiBurguerManiaDB;User=root;Password=senha"
   }
 }
-``` 
-
-
+```
 
 ## Licença
+
 Este projeto está distribuído sob a licença MIT. Veja o arquivo LICENSE para mais informações.
-
-
