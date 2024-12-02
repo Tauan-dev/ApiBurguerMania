@@ -113,3 +113,4 @@ C:\Users\Tauan Neres\Documents\Residência em Software TIC36 - CEPEDI\Prática\5
 C:\Users\Tauan Neres\Documents\Residência em Software TIC36 - CEPEDI\Prática\5 - Projeto Final\Backend\ApiBurguerMania\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Tauan Neres\Documents\Residência em Software TIC36 - CEPEDI\Prática\5 - Projeto Final\Backend\ApiBurguerMania\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Tauan Neres\Documents\Residência em Software TIC36 - CEPEDI\Prática\5 - Projeto Final\Backend\ApiBurguerMania\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\Tauan Neres\Documents\Residência em Software TIC36 - CEPEDI\Prática\5 - Projeto Final\Backend\ApiBurguerMania\obj\Debug\net8.0\ApiBurguerMania.sourcelink.json
