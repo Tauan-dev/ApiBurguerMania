@@ -24,15 +24,30 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
         new MySqlServerVersion(new Version(8, 0, 25))  // Use a versão 8.0.28 do MySQL
     ));
 
+// Adiciona o CORS (Cross-Origin Resource Sharing)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost4200", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")  // Permite apenas o frontend rodando em localhost:4200
+              .AllowAnyMethod()  // Permite qualquer método HTTP
+              .AllowAnyHeader(); // Permite qualquer cabeçalho
+    });
+});
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
+// Usa o Swagger
 app.UseSwagger();
 app.UseSwaggerUI();
 
 // Redirecionamento para HTTPS
 app.UseHttpsRedirection();
+
+// Usa o CORS
+app.UseCors("AllowLocalhost4200");
 
 // Mapeia os controllers automaticamente
 app.MapControllers();

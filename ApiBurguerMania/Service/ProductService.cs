@@ -77,11 +77,11 @@ namespace ApiBurguerMania.Service
             var product = new Product
             {
                 Name = productDto.Name,
-                BaseDescription = productDto.BaseDescription, // Usando BaseDescription
-                FullDescription = productDto.FullDescription, // Usando FullDescription
+                BaseDescription = productDto.BaseDescription!, // Usando BaseDescription
+                FullDescription = productDto.FullDescription!, // Usando FullDescription
                 Price = productDto.Price,
                 CategoryId = productDto.CategoryId,
-                PathImage = productDto.PathImage // Usando PathImage
+                PathImage = productDto.PathImage! // Usando PathImage
             };
 
             // Adicionando ao contexto do EF
@@ -104,31 +104,39 @@ namespace ApiBurguerMania.Service
         // Atualizar um produto existente
         public async Task<bool> UpdateProductAsync(int productId, UpdateProductDTO productDto)
         {
-            if (productDto == null)
+            try
             {
-                throw new ArgumentNullException(nameof(productDto), "Os dados do produto não podem ser nulos.");
-            }
+                var product = await _dbContext.Products.FindAsync(productId);
 
-            var product = await _dbContext.Products.FindAsync(productId);
-            if (product == null)
+                if (product == null)
+                {
+                    return false;
+                }
+
+                product.Name = productDto.Name!;
+                product.PathImage = productDto.PathImage!;
+                product.Price = productDto.Price;
+                product.BaseDescription = productDto.BaseDescription!;
+                product.FullDescription = productDto.FullDescription!;
+
+                _dbContext.Entry(product).State = EntityState.Modified;
+
+                await _dbContext.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
             {
-                throw new KeyNotFoundException("Produto não encontrado");
+                // Log a exception and return false
+                Console.WriteLine($"Erro ao atualizar o produto: {ex.Message}");
+                return false;
             }
-
-            // Atualizando os campos do produto
-            product.Name = productDto.Name;
-            product.BaseDescription = productDto.BaseDescription; // Usando BaseDescription
-            product.FullDescription = productDto.FullDescription; // Usando FullDescription
-            product.Price = productDto.Price;
-            product.CategoryId = productDto.CategoryId;
-            product.PathImage = productDto.PathImage; // Usando PathImage
-
-            // Marcando a entidade como modificada para ser salva
-            _dbContext.Entry(product).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
-
-            return true;
         }
+
+
+
+
+
 
         // Deletar um produto
         public async Task<bool> DeleteProductAsync(int productId)
@@ -145,5 +153,30 @@ namespace ApiBurguerMania.Service
 
             return true;
         }
+
+        // Novo método para buscar produtos por categoria
+        public async Task<IEnumerable<ProductDTO>> GetProductsByCategoryAsync(int categoryId)
+        {
+            var products = await _dbContext.Products
+                .Where(p => p.CategoryId == categoryId) // Agora buscando diretamente pelo categoryId
+                .Select(product => new ProductDTO
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    BaseDescription = product.BaseDescription,
+                    FullDescription = product.FullDescription,
+                    Price = product.Price,
+                    CategoryId = product.CategoryId
+                })
+                .ToListAsync();
+
+            if (products == null || !products.Any())
+            {
+                return Enumerable.Empty<ProductDTO>(); // Retorna uma lista vazia se nenhum produto for encontrado
+            }
+
+            return products;
+        }
+
     }
 }

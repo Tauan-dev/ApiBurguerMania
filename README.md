@@ -86,6 +86,17 @@ O banco de dados é configurado no arquivo `appsettings.json`. Abaixo está um e
 }
 ```
 
+## Padrão POST no swagger
+
+### Categories 
+```json
+  {
+    "name": "X-Fitness",
+    "description": "Opções saudáveis e nutritivas.",
+    "pathImage": "assets/images/x-fitness-category.jpg"
+  }
+```
+
 ## Licença
 
 Este projeto está distribuído sob a licença MIT. Veja o arquivo LICENSE para mais informações.

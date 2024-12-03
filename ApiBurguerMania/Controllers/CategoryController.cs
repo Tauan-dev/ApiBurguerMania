@@ -2,7 +2,6 @@ using ApiBurguerMania.Dto.Category;
 using ApiBurguerMania.Service.Interface;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ApiBurguerMania.Controllers
@@ -42,12 +41,11 @@ namespace ApiBurguerMania.Controllers
             try
             {
                 var category = await _categoryService.GetCategoryByIdAsync(id);
+                if (category == null)
+                {
+                    return NotFound("Categoria não encontrada");
+                }
                 return Ok(category);
-            }
-            catch (KeyNotFoundException)
-            {
-                // Caso a categoria não seja encontrada
-                return NotFound("Categoria não encontrada");
             }
             catch (Exception ex)
             {
@@ -62,23 +60,21 @@ namespace ApiBurguerMania.Controllers
         {
             if (categoryDto == null)
             {
-                // Caso os dados sejam nulos
                 return BadRequest("Os dados da categoria são obrigatórios.");
             }
 
             try
             {
+                // Aceitar o PathImage como uma string simples
                 var createdCategory = await _categoryService.CreateCategoryAsync(categoryDto);
                 return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.Id }, createdCategory);
             }
             catch (ArgumentNullException ex)
             {
-                // Caso os dados sejam inválidos
                 return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                // Retorna erro interno no servidor
                 return StatusCode(500, $"Erro interno no servidor: {ex.Message}");
             }
         }
@@ -89,29 +85,20 @@ namespace ApiBurguerMania.Controllers
         {
             if (categoryDto == null)
             {
-                // Caso os dados sejam nulos
                 return BadRequest("Os dados da categoria são obrigatórios.");
             }
 
             try
             {
                 var success = await _categoryService.UpdateCategoryAsync(id, categoryDto);
-                if (success)
+                if (!success)
                 {
-                    return NoContent(); // Sucesso, sem conteúdo a retornar
+                    return NotFound("Categoria não encontrada");
                 }
-
-                // Caso a categoria não seja encontrada
-                return NotFound("Categoria não encontrada");
-            }
-            catch (KeyNotFoundException)
-            {
-                // Caso a categoria não seja encontrada
-                return NotFound("Categoria não encontrada");
+                return NoContent(); // Sucesso, sem conteúdo a retornar
             }
             catch (Exception ex)
             {
-                // Retorna erro interno no servidor
                 return StatusCode(500, $"Erro interno no servidor: {ex.Message}");
             }
         }
@@ -123,21 +110,14 @@ namespace ApiBurguerMania.Controllers
             try
             {
                 var success = await _categoryService.DeleteCategoryAsync(id);
-                if (success)
+                if (!success)
                 {
-                    return NoContent(); // Sucesso, sem conteúdo a retornar
+                    return NotFound("Categoria não encontrada");
                 }
-
-                // Caso a categoria não seja encontrada
-                return NotFound("Categoria não encontrada");
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound("Categoria não encontrada");
+                return NoContent(); // Sucesso, sem conteúdo a retornar
             }
             catch (Exception ex)
             {
-                // Retorna erro interno no servidor
                 return StatusCode(500, $"Erro interno no servidor: {ex.Message}");
             }
         }

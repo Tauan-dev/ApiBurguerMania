@@ -24,10 +24,10 @@ namespace ApiBurguerMania.Service
             return await _dbContext.Categories
                 .Select(category => new CategoryDTO
                 {
-                    Id = category.Id,  // Alterado para Id
+                    Id = category.Id,
                     Name = category.Name,
                     Description = category.Description,
-                    PathImage = category.PathImage // Incluído PathImage
+                    PathImage = category.PathImage
                 })
                 .ToListAsync();
         }
@@ -45,10 +45,10 @@ namespace ApiBurguerMania.Service
 
             return new CategoryDTO
             {
-                Id = category.Id,  // Alterado para Id
+                Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
-                PathImage = category.PathImage // Incluído PathImage
+                PathImage = category.PathImage
             };
         }
 
@@ -60,11 +60,12 @@ namespace ApiBurguerMania.Service
                 throw new ArgumentNullException(nameof(categoryDto), "Os dados da categoria não podem ser nulos.");
             }
 
+            // Não estamos validando o campo PathImage, ele pode ser qualquer string
             var category = new Category
             {
                 Name = categoryDto.Name,
                 Description = categoryDto.Description,
-                PathImage = categoryDto.PathImage 
+                PathImage = categoryDto.PathImage
             };
 
             _dbContext.Categories.Add(category);
@@ -72,10 +73,10 @@ namespace ApiBurguerMania.Service
 
             return new CategoryDTO
             {
-                Id = category.Id,  // Alterado para Id
+                Id = category.Id,
                 Name = category.Name,
                 Description = category.Description,
-                PathImage = category.PathImage // Retorna PathImage
+                PathImage = category.PathImage
             };
         }
 
@@ -90,6 +91,7 @@ namespace ApiBurguerMania.Service
                 throw new KeyNotFoundException("Categoria não encontrada");
             }
 
+            // Não estamos validando o campo PathImage, ele pode ser qualquer string
             category.Name = categoryDto.Name;
             category.Description = categoryDto.Description;
             category.PathImage = categoryDto.PathImage;

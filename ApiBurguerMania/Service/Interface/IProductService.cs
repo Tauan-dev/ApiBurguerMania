@@ -9,5 +9,10 @@ namespace ApiBurguerMania.Service.Interface
         Task<ProductDTO> CreateProductAsync(CreateProductDTO productDto);
         Task<bool> UpdateProductAsync(int productId, UpdateProductDTO productDto);
         Task<bool> DeleteProductAsync(int productId);
+
+        // Método para buscar produtos por categoria
+        Task<IEnumerable<ProductDTO>> GetProductsByCategoryAsync(int categoryId);
+
+
     }
 }
