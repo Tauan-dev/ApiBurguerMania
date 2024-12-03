@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ApiBurguerMania")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d34066b8692f7f77b1d8f7a2ec8ec9a8b50be548")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2b780431c2e3bdac016b0f20439f315f2b83c76b")]
 [assembly: System.Reflection.AssemblyProductAttribute("ApiBurguerMania")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ApiBurguerMania")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

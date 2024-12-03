@@ -71,6 +71,11 @@ dotnet ef database update
 dotnet build
 dotnet run
 ```
+5.**Segue em anexo um tutorial como importar dados via dump no mysql, para facilitar:**
+
+https://www.youtube.com/watch?v=RkLB0aQh5Es
+
+Dados enviados no bkpburguermania.sql
 
 A API estará disponível em http://localhost:5299/swagger/index.html
 
@@ -88,13 +93,27 @@ O banco de dados é configurado no arquivo `appsettings.json`. Abaixo está um e
 
 ## Padrão POST no swagger
 
-### Categories 
+### Categories
+
 ```json
-  {
-    "name": "X-Fitness",
-    "description": "Opções saudáveis e nutritivas.",
-    "pathImage": "assets/images/x-fitness-category.jpg"
-  }
+{
+  "name": "X-Fitness",
+  "description": "Opções saudáveis e nutritivas.",
+  "pathImage": "assets/images/x-fitness-category.jpg"
+}
+```
+
+### Products
+
+```json
+{
+  "name": "X-Fitness Burger",
+  "baseDescription": "Um hambúrguer saudável com carne de frango grelhada.",
+  "fullDescription": "Um delicioso hambúrguer de frango grelhado, acompanhado de vegetais frescos e molho especial.",
+  "price": 25.99,
+  "pathImage": "assets/images/x-fitness-burger.jpg",
+  "categoryId": 1
+}
 ```
 
 ## Licença
